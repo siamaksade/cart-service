@@ -4,7 +4,7 @@ node('maven') {
     sh "mvn package"
   }
   stage('Build Image') {
-    sh "oc start-build ola --from-file=target/cart.jar --follow"
+    sh "oc start-build cart --from-file=target/cart.jar --follow"
   }
   stage('Deploy Image') {
     openshiftDeploy depCfg: 'cart'
