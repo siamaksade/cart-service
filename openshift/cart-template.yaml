@@ -38,7 +38,7 @@ objects:
         from:
           kind: ImageStreamTag
           name: redhat-openjdk18-openshift:1.0
-          namespace: openshift
+          namespace: ${IMAGE_STREAM_NAMESPACE}
       type: Source
     triggers:
     - type: ConfigChange
@@ -161,3 +161,8 @@ parameters:
 - description: Maven mirror url. If nexus is deployed locally, use nexus url (e.g. http://nexus.ci:8081/content/groups/public/)
   displayName: Maven mirror url
   name: MAVEN_MIRROR_URL
+- displayName: ImageStream Namespace
+  description: Namespace in which the ImageStreams for Red Hat OpenJDK image is installed. These ImageStreams are normally installed in the openshift namespace. You should only need to modify this if you've installed the ImageStreams in a different namespace/project.
+  name: IMAGE_STREAM_NAMESPACE
+  required: true
+  value: openshift
