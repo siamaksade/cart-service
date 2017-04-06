@@ -94,4 +94,49 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+		  <id>cart-tests</id>
+		  	<build>
+				<plugins>
+					<plugin>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-maven-plugin</artifactId>
+				        <executions>
+				          <execution>
+				            <goals>
+				              <goal>repackage</goal>
+				            </goals>
+				            <configuration>
+				              <skip>true</skip>
+				            </configuration>
+				          </execution>
+				        </executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+		  <id>discount-tests</id>
+		  	<build>
+				<plugins>
+					<plugin>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-maven-plugin</artifactId>
+				        <executions>
+				          <execution>
+				            <goals>
+				              <goal>repackage</goal>
+				            </goals>
+				            <configuration>
+				              <skip>true</skip>
+				            </configuration>
+				          </execution>
+				        </executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
