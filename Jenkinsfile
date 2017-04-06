@@ -2,6 +2,7 @@ node('maven') {
   stage('Build') {
     git url: "https://github.com/siamaksade/cart-service.git"
     sh "mvn package"
+    stash name:"jar", includes:"target/cart.jar"
   }
   stage('Test') {
     parallel(
@@ -14,6 +15,7 @@ node('maven') {
     )
   }
   stage('Build Image') {
+    unstash name:"jar"
     sh "oc start-build cart --from-file=target/cart.jar --follow"
   }
   stage('Deploy') {
