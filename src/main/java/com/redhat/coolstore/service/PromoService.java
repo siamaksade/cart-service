@@ -51,11 +51,8 @@ public class PromoService implements Serializable {
 			if ( shoppingCart.getCartItemTotal() >= 75) {
 				shoppingCart.setShippingPromoSavings(shoppingCart.getShippingTotal() * -1);
 				shoppingCart.setShippingTotal(0);
-				
 			}
-			
 		}
-		
 	}	
 		
 	public Set<Promotion> getPromotions() {

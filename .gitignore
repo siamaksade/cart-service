@@ -3,3 +3,6 @@ target/
 tmp/
 *.class
 *.jar
+.classpath
+.project
+.settings/
