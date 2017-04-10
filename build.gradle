@@ -1,0 +1,37 @@
+plugins {
+	id "java"
+    id "io.spring.dependency-management" version "1.0.1.RELEASE"
+    id 'org.springframework.boot' version '1.5.2.RELEASE'
+}
+
+version = "1.0.0-SNAPSHOT"
+
+jar {
+    archiveName = 'cart.jar'
+}
+
+repositories {
+	mavenLocal()
+	maven { 
+		url "http://nexus.lab-infra.svc.cluster.local:8081/content/groups/public/" 
+	}
+	mavenCentral()
+}
+
+dependencyManagement {
+     imports {
+          mavenBom "org.springframework.cloud:spring-cloud-dependencies:Camden.SR2"
+     }
+}
+
+dependencies {
+	compile("org.springframework.boot:spring-boot-starter-web")
+	compile("org.springframework.boot:spring-boot-starter-jersey")
+	compile("org.springframework.boot:spring-boot-starter-actuator")
+	compile("org.springframework.cloud:spring-cloud-starter-feign") {
+		exclude group: "com.sun.jersey", module: "jersey-client"
+	}
+
+	runtime("org.springframework.boot:spring-boot-starter-tomcat")
+	testCompile("org.springframework.boot:spring-boot-starter-test")
+}
