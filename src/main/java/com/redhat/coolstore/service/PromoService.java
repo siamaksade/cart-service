@@ -47,8 +47,8 @@ public class PromoService implements Serializable {
 	
 	public void applyShippingPromotions(ShoppingCart shoppingCart) {
 		if ( shoppingCart != null ) {
-			//PROMO: if cart total is greater than 75, free shipping
-			if ( shoppingCart.getCartItemTotal() >= 75) {
+			//PROMO: if cart total is greater than 40, free shipping
+			if ( shoppingCart.getCartItemTotal() >= 40) {
 				shoppingCart.setShippingPromoSavings(shoppingCart.getShippingTotal() * -1);
 				shoppingCart.setShippingTotal(0);
 			}

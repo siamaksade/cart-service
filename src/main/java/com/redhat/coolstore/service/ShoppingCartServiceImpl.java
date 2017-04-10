@@ -6,7 +6,10 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.redhat.coolstore.model.Product;
@@ -25,9 +28,25 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	@Autowired
 	PromoService ps;
 	
+	@Value("${application.mode}")
+	String mode;
+	
 	private Map<String, ShoppingCart> cartDB = new HashMap<>();
 
 	private Map<String, Product> productMap = new HashMap<>();
+	
+	@PostConstruct
+	public void init(){
+		if ("dev".contentEquals(mode)) {
+			// cache dummy product
+			Product dummy = new Product();
+			dummy.setItemId("666");
+			dummy.setName("Dummy Product");
+			dummy.setPrice(50);
+			dummy.setDesc("Dummy product for testing in DEV mode");
+			productMap.put(dummy.getItemId(), dummy);
+		}
+	}
 
 	@Override
 	public ShoppingCart getShoppingCart(String cartId) {
