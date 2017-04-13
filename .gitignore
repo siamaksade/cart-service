@@ -1,0 +1,11 @@
+target/
+*.log
+tmp/
+*.class
+*.jar
+.classpath
+.project
+.settings/
+.gradle/
+build/
+/bin/
