@@ -161,8 +161,8 @@ objects:
           livenessProbe:
             httpGet:
               path: /health
-              port: 8081
-            initialDelaySeconds: 180
+              port: 8080
+            initialDelaySeconds: 15
           name: coolstore-gw
           ports:
           - containerPort: 8778
@@ -170,7 +170,7 @@ objects:
           readinessProbe:
             httpGet:
               path: /health
-              port: 8081
+              port: 8080
             initialDelaySeconds: 10
           resources:
             limits:
@@ -276,13 +276,21 @@ objects:
             name: http
             protocol: TCP
           readinessProbe:
-            failureThreshold: 10
-            exec:
-              command:
-              - /bin/bash
-              - -c
-              - curl -s -u Skq3VtCd:oktt6yhw 'http://localhost:8080/manager/jmxproxy/?get=Catalina%3Atype%3DServer&att=stateName'
-                |grep -iq 'stateName *= *STARTED'
+            failureThreshold: 5
+            httpGet:
+              path: /health
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 15
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          livenessProbe:
+            failureThreshold: 5
+            httpGet:
+              path: /health
+              port: 8080
+              scheme: HTTP
             initialDelaySeconds: 15
             periodSeconds: 5
             successThreshold: 1
@@ -638,7 +646,7 @@ objects:
           livenessProbe:
             failureThreshold: 5
             httpGet:
-              path: /
+              path: /node
               port: 8080
               scheme: HTTP
             initialDelaySeconds: 120
@@ -659,7 +667,7 @@ objects:
           readinessProbe:
             failureThreshold: 5
             httpGet:
-              path: /
+              path: /node
               port: 8080
               scheme: HTTP
             initialDelaySeconds: 15
@@ -696,7 +704,8 @@ objects:
       service.alpha.openshift.io/dependencies: '[{"name":"inventory-postgresql","namespace":"","kind":"Service"}]'
     labels:
       app: inventory
-      application: inventory
+      application: coolstore
+      component: inventory
     name: inventory
   spec:
     ports:
@@ -709,7 +718,8 @@ objects:
   kind: Route
   metadata:
     labels:
-      application: inventory
+      application: coolstore
+      component: inventory
     name: inventory
   spec:
     host: inventory-${HOSTNAME_SUFFIX}
@@ -796,7 +806,8 @@ objects:
   kind: Service
   metadata:
     labels:
-      application: inventory
+      application: coolstore
+      component: inventory
     name: inventory-postgresql
   spec:
     ports:
@@ -808,7 +819,8 @@ objects:
   kind: PersistentVolumeClaim
   metadata:
     labels:
-      application: inventory
+      application: coolstore
+      component: inventory
     name: inventory-postgresql-pv
   spec:
     accessModes:
