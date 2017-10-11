@@ -171,7 +171,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Override
     public ShoppingCart addItem(String cartId, String itemId, int quantity) {
         ShoppingCart cart = getShoppingCart(cartId);
-        LOG.info("### Got shopping cart: {}", cart);
         Product product = getProduct(itemId);
 
         if (product == null) {
