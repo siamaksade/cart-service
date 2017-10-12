@@ -81,7 +81,10 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
             return cart;
         }
 
-        return carts.get(cartId);
+        ShoppingCart cart = carts.get(cartId);
+        priceShoppingCart(cart);
+        carts.put(cartId, cart);
+        return cart;
     }
 
     private void priceShoppingCart(ShoppingCart sc) {
