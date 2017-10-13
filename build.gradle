@@ -14,6 +14,7 @@ repositories {
 	mavenLocal()
 	maven { 
 		url "http://nexus.lab-infra.svc.cluster.local:8081/content/groups/public/" 
+    url "https://maven.repository.redhat.com/ga/"
 	}
 	mavenCentral()
 }
@@ -21,6 +22,7 @@ repositories {
 dependencyManagement {
      imports {
           mavenBom "org.springframework.cloud:spring-cloud-dependencies:Camden.SR2"
+          mavenBom "org.infinispan:infinispan-bom:6.3.1.Final-redhat-1"
      }
 }
 
@@ -31,6 +33,9 @@ dependencies {
 	compile("org.springframework.cloud:spring-cloud-starter-feign") {
 		exclude group: "com.sun.jersey", module: "jersey-client"
 	}
+
+  compile("org.infinispan:infinispan-core")
+  compile("org.infinispan:infinispan-client-hotrod")
 
 	runtime("org.springframework.boot:spring-boot-starter-tomcat")
 	testCompile("org.springframework.boot:spring-boot-starter-test")
