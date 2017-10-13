@@ -16,6 +16,13 @@
         <version>1.4.2.RELEASE</version>
     </parent>
 
+    <repositories>
+      <repository>
+        <id>redhat-ga</id>
+        <url>https://maven.repository.redhat.com/ga/</url>
+      </repository>
+    </repositories>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
