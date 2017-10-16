@@ -37,7 +37,7 @@ objects:
           value: ${MAVEN_MIRROR_URL}
         from:
           kind: ImageStreamTag
-          name: redhat-openjdk18-openshift:1.0
+          name: redhat-openjdk18-openshift:1.1
           namespace: ${IMAGE_STREAM_NAMESPACE}
       type: Source
     triggers:
