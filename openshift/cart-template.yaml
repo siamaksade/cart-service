@@ -155,7 +155,7 @@ parameters:
   displayName: Git source repository
   name: GIT_URI
   required: true
-  value: https://github.com/siamaksade/cart-service.git
+  value: https://github.com/tonyfieit/cart-service.git
 - description: Git branch/tag reference
   displayName: Git branch/tag reference
   name: GIT_REF
